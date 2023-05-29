@@ -17,7 +17,7 @@ async function run() {
   core.setOutput('name', pkgInfo.name);
   core.setOutput('registry', registry);
 
-  const lastCommitId = await execGit(`git log -n1 --format="%h"`);
+  // const lastCommitId = await execGit(`git log -n1 --format="%h"`);
 
   try {
     const configFiles = [
@@ -60,15 +60,15 @@ async function run() {
     }
     console.log('Result:', result);
   } catch (error) {
-    console.error('> Rollback to last commit');
-    const currentCommitId = await execGit(`git log -n1 --format="%h"`);
-    const tagId = await execGit(`git tag --contains ${currentCommitId}`);
+    // console.error('> Rollback to last commit');
+    // const currentCommitId = await execGit(`git log -n1 --format="%h"`);
+    // const tagId = await execGit(`git tag --contains ${currentCommitId}`);
 
-    await execGit(`git push --delete origin ${tagId}`);
-    await execGit(`git reset --hard ${lastCommitId}`);
-    await execGit(`git push --force`);
+    // await execGit(`git push --delete origin ${tagId}`);
+    // await execGit(`git reset --hard ${lastCommitId}`);
+    // await execGit(`git push --force`);
 
-    console.error('> Rollback finished');
+    // console.error('> Rollback finished');
 
     // console.error(error);
     core.setFailed(error);
