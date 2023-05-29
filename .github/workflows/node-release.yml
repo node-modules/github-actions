@@ -33,6 +33,8 @@ on:
 
 jobs:
   Release:
+    permissions:
+      id-token: write
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -83,6 +85,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           DRYRUN: ${{ inputs.dryRun }}
+          NPM_CONFIG_PROVENANCE: true
 
       - name: Publish ${{ steps.release.outputs.name }}@${{ steps.release.outputs.release_version }}
         if: steps.release.outputs.release_version && !inputs.dryRun
