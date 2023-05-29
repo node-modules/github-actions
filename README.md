@@ -12,8 +12,7 @@
 
 自动跑 Lint 和 Cov 单测
 
-> 参考示例：https://github.com/artus-cli/examples/actions
-
+> 参考示例：<https://github.com/artus-cli/examples/actions>
 
 - 配置 `npm scripts`：
 
@@ -40,19 +39,38 @@ on:
   pull_request:
     branches: [ master, main, next, beta, '*.x' ]
 
-  schedule:
-    - cron: '0 2 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  Job:
+    name: Node.js
+    uses: node-modules/github-actions/.github/workflows/node-test.yml@master
+    # 支持以下自定义配置，一般用默认值即可
+    # with:
+    #   os: 'ubuntu-latest, macos-latest, windows-latest'
+    #   version: '16, 18'
+```
+
+### 开启 MySQL 和 Redis 服务依赖
+
+```yaml
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+  pull_request:
+    branches: [ master ]
 
   workflow_dispatch: {}
 
 jobs:
   Job:
     name: Node.js
-    uses: artusjs/github-actions/.github/workflows/node-test.yml@v1
-    # 支持以下自定义配置，一般用默认值即可
-    # with:
-    #   os: 'ubuntu-latest, macos-latest, windows-latest'
-    #   version: '16, 18'
+    uses: node-modules/github-actions/.github/workflows/node-test-mysql.yml@master
+    with:
+      os: 'ubuntu-latest'
 ```
 
 ## 发布 NPM 包
@@ -75,17 +93,18 @@ jobs:
 ### 版本号规则
 
 根据 Commit Message 自动计算下一个版本号：
-  - major 大版本：`BREAKING CHANGE`
-  - minor 特性版本： `feat:` 等
-  - patch 补丁版本：`fix:` 等
-  - 不发布版本： `chore:` / `docs:` / `style:` 等
-  - 详见：https://github.com/semantic-release/commit-analyzer
+
+- major 大版本：`BREAKING CHANGE`
+- minor 特性版本： `feat:` 等
+- patch 补丁版本：`fix:` 等
+- 不发布版本： `chore:` / `docs:` / `style:` 等
+- 详见：<https://github.com/semantic-release/commit-analyzer>
 
 **注意：**
-  - 不支持发布 0.x 版本，master 首次发布将是 1.0.0 版本
-  - 如果你不期望直接发布，请在 beta 分支提交代码运行，将发布 `1.0.0-beta.1` 版本
-  - 多版本发布实践参见 [semantic-release](https://semantic-release.gitbook.io/semantic-release/recipes/release-workflow/distribution-channels) 文档
 
+- 不支持发布 0.x 版本，master 首次发布将是 1.0.0 版本
+- 如果你不期望直接发布，请在 beta 分支提交代码运行，将发布 `1.0.0-beta.1` 版本
+- 多版本发布实践参见 [semantic-release](https://semantic-release.gitbook.io/semantic-release/recipes/release-workflow/distribution-channels) 文档
 
 ### 配置方式
 
@@ -116,7 +135,7 @@ on:
 jobs:
   release:
     name: Node.js
-    uses: artusjs/github-actions/.github/workflows/node-release.yml@v1
+    uses: node-modules/github-actions/.github/workflows/node-release.yml@master
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
