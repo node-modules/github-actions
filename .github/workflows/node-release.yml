@@ -33,8 +33,9 @@ on:
 
 jobs:
   Release:
-    permissions:
-      id-token: write
+    permissions: read-all|write-all
+    # permissions:
+    #   id-token: write
     runs-on: ubuntu-latest
     defaults:
       run:

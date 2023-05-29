@@ -11,11 +11,10 @@ module.exports = {
       },
     ],
 
-    // 403, Resource not accessible by integration, https://github.com/eggjs/egg-mock/actions/runs/5112843660/jobs/9191347769
-    // [ '@semantic-release/github',
-    //   {
-    //     addReleases: 'bottom',
-    //   },
-    // ],
+    [ '@semantic-release/github',
+      {
+        addReleases: 'bottom',
+      },
+    ],
   ],
 };
