@@ -94,7 +94,14 @@ jobs:
 
 根据 Commit Message 自动计算下一个版本号：
 
-- major 大版本：`BREAKING CHANGE`
+- major 大版本：`BREAKING CHANGE`，必须加到 commit body 里面而不是第一行标题，否则不生效
+
+```bash
+perf(pencil): remove graphiteWidth option
+
+BREAKING CHANGE: The graphiteWidth option has been removed. The default graphite width of 10mm is always used for performance reason.
+```
+
 - minor 特性版本： `feat:` 等
 - patch 补丁版本：`fix:` 等
 - 不发布版本： `chore:` / `docs:` / `style:` 等
