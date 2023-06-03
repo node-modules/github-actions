@@ -10,8 +10,8 @@ on:
 
       version:
         type: string
-        description: 'Node.js Version, such as 16, 18'
-        default: '16, 18'
+        description: 'Node.js Version, such as 16, 18, 20'
+        default: '16, 18, 20'
         
       install:
         type: string
