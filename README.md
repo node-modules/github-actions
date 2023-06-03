@@ -1,4 +1,4 @@
-# artusjs/github-actions
+# node-modules/github-actions
 
 为开源项目提供常见的可复用的 [GitHub Actions Workflow](https://docs.github.com/en/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow)。
 
