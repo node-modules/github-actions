@@ -34,8 +34,9 @@ on:
 jobs:
   Release:
     permissions:
+      # contents: write
+      contents: read
       id-token: write
-      contents: write
       deployments: write
     runs-on: ubuntu-latest
     defaults:
