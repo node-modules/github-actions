@@ -1,14 +1,8 @@
 const path = require('path');
 const fs = require('fs');
 const core = require('@actions/core');
-const { getExecOutput } = require('@actions/exec');
 const semanticRelease = require('semantic-release');
 const { request } = require('undici');
-
-async function execGit(cmd) {
-  const { stdout } = await getExecOutput(cmd);
-  return stdout.trim();
-}
 
 async function run() {
   const mainRepoPath = process.cwd();
@@ -16,8 +10,6 @@ async function run() {
   const registry = pkgInfo.publishConfig?.registry || 'https://registry.npmjs.org';
   core.setOutput('name', pkgInfo.name);
   core.setOutput('registry', registry);
-
-  // const lastCommitId = await execGit(`git log -n1 --format="%h"`);
 
   try {
     const configFiles = [
@@ -68,17 +60,7 @@ async function run() {
     }
     console.log('Result:', result);
   } catch (error) {
-    // console.error('> Rollback to last commit');
-    // const currentCommitId = await execGit(`git log -n1 --format="%h"`);
-    // const tagId = await execGit(`git tag --contains ${currentCommitId}`);
-
-    // await execGit(`git push --delete origin ${tagId}`);
-    // await execGit(`git reset --hard ${lastCommitId}`);
-    // await execGit(`git push --force`);
-
-    // console.error('> Rollback finished');
-
-    // console.error(error);
+    console.error(error);
     core.setFailed(error);
   }
 }

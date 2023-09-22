@@ -48,7 +48,7 @@ jobs:
     # 支持以下自定义配置，一般用默认值即可
     # with:
     #   os: 'ubuntu-latest, macos-latest, windows-latest'
-    #   version: '16, 18'
+    #   version: '16, 18, 20'
 ```
 
 ### 开启 MySQL 和 Redis 服务依赖
