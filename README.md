@@ -39,8 +39,6 @@ on:
   pull_request:
     branches: [ master, main, next, beta, '*.x' ]
 
-  workflow_dispatch: {}
-
 jobs:
   Job:
     name: Node.js
@@ -62,8 +60,6 @@ on:
 
   pull_request:
     branches: [ master ]
-
-  workflow_dispatch: {}
 
 jobs:
   Job:

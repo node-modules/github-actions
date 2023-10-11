@@ -5,7 +5,7 @@ on:
     inputs:
       os:
         type: string
-        description: 'Operator System, such as: ubuntu-latest,macos-latest'
+        description: 'Operator System, such as: ubuntu-latest, macos-latest'
         default: 'ubuntu-latest, macos-latest, windows-latest'
 
       version:

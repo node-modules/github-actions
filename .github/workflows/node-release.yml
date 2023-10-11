@@ -14,7 +14,7 @@ on:
       checkTest:
         type: boolean
         description: whether run test before release
-        default: true
+        default: false
 
       dryRun:
         type: boolean
