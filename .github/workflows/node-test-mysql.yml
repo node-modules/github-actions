@@ -34,6 +34,7 @@ jobs:
     outputs:
       os: ${{ steps.handler.outputs.os }}
       version: ${{ steps.handler.outputs.version }}
+      mysql_version: ${{ steps.handler.outputs.mysql_version }}
 
     steps:
       # Checkout action repository
