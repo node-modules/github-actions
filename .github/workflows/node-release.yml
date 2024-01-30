@@ -28,7 +28,7 @@ on:
 
       action_ref:
         type: string
-        description: 'Branch name for artusjs/github-actions, for test purpose'
+        description: 'Branch name for node-modules/github-actions, for test purpose'
         default: master
 
 jobs:
@@ -51,7 +51,7 @@ jobs:
       - name: Checkout action repository
         uses: actions/checkout@v3
         with:
-          repository: artusjs/github-actions
+          repository: node-modules/github-actions
           path: action_repo
           ref: ${{ inputs.action_ref }}
 
