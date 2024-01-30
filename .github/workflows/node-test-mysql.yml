@@ -68,13 +68,14 @@ jobs:
       matrix:
         os: ${{ fromJSON(needs.setup.outputs.os) }}
         version: ${{ fromJSON(needs.setup.outputs.version) }}
+        mysql: ${{ fromJSON(needs.setup.outputs.mysql_version) }}
 
-    name: Test (${{ matrix.os }}, ${{ matrix.version }})
+    name: Test (${{ matrix.os }}, ${{ matrix.version }}, ${{ matrix.mysql_version }})
     runs-on: ${{ matrix.os }}
 
     services:
       mysql:
-        image: mysql:${{ inputs.mysql_version }}
+        image: mysql:${{ matrix.mysql_version }}
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
           MYSQL_DATABASE: test
@@ -90,7 +91,7 @@ jobs:
           - 6379:6379
 
     concurrency:
-      group: ${{ github.workflow }}-#${{ github.event.pull_request.number || github.ref }}-(${{ matrix.os }}, ${{ matrix.version }})
+      group: ${{ github.workflow }}-#${{ github.event.pull_request.number || github.ref }}-(${{ matrix.os }}, ${{ matrix.version }}, ${{ matrix.mysql_version }})
       cancel-in-progress: true
 
     steps:
