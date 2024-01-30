@@ -72,7 +72,7 @@ jobs:
         version: ${{ fromJSON(needs.setup.outputs.version) }}
         mysql_version: ${{ fromJSON(needs.setup.outputs.mysql_version) }}
 
-    name: Test (${{ matrix.os }}, ${{ matrix.version }}, ${{ matrix.mysql_version }})
+    name: Test (${{ matrix.os }}, ${{ matrix.version }}, mysql@${{ matrix.mysql_version }})
     runs-on: ${{ matrix.os }}
 
     services:
