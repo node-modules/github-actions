@@ -33,7 +33,7 @@ jobs:
     steps:
       # Checkout action repository
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: node-modules/github-actions
           path: action_repo
@@ -41,7 +41,7 @@ jobs:
 
       # Setup Node.js environment
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
 
       # Install dependencies
       - name: Install dependencies
@@ -73,12 +73,13 @@ jobs:
 
     steps:
       - name: Checkout Git Source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.version }}
+          check-latest: true
 
       - name: Install Dependencies
         run: ${{ inputs.install }}
