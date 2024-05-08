@@ -49,7 +49,7 @@ jobs:
     steps:
       # Checkout action repository
       - name: Checkout action repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: node-modules/github-actions
           path: action_repo
@@ -57,14 +57,14 @@ jobs:
 
       # Checkout project repository
       - name: Checkout project repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: main_repo
           token: ${{ secrets.GIT_TOKEN }}
 
       # Setup Node.js environment
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
 
       # Install action dependencies
       - name: Install action dependencies
