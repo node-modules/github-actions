@@ -10,8 +10,8 @@ on:
 
       version:
         type: string
-        description: 'Node.js Version, such as 16, 18'
-        default: '16, 18'
+        description: 'Node.js Version, such as 16, 18, 20, 22'
+        default: '16, 18, 20, 22'
         
       install:
         type: string
@@ -39,7 +39,7 @@ jobs:
     steps:
       # Checkout action repository
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: node-modules/github-actions
           path: action_repo
@@ -47,7 +47,7 @@ jobs:
 
       # Setup Node.js environment
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
 
       # Install dependencies
       - name: Install dependencies
@@ -98,12 +98,29 @@ jobs:
 
     steps:
       - name: Checkout Git Source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Calculate Architecture
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const osVersion = '${{ matrix.os }}';
+            const nodeVersion = '${{ matrix['node-version'] }}';
+            const isMacOS = osVersion === 'macos-latest' || osVersion.startsWith('macos');
+            const isMajor14 = nodeVersion === '14' || nodeVersion.startsWith('14.');
+            if (isMacOS && isMajor14) {
+              return 'x64';
+            } else {
+              return '';
+            }
 
       - name: Use Node.js ${{ matrix.version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.version }}
+          architecture: ${{ steps.calculate_architecture.outputs.result }}
+          check-latest: true
 
       - name: Install Dependencies
         run: ${{ inputs.install }}
