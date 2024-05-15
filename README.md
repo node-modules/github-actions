@@ -35,7 +35,6 @@ name: CI
 on:
   push:
     branches: [ master, main ]
-
   pull_request:
     branches: [ master, main, next, beta, '*.x' ]
 
@@ -46,7 +45,9 @@ jobs:
     # 支持以下自定义配置，一般用默认值即可
     # with:
     #   os: 'ubuntu-latest, macos-latest, windows-latest'
-    #   version: '16, 18, 20'
+    #   version: '16, 18, 20, 22'
+    # secrets:
+    #   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 ```
 
 ### 开启 MySQL 和 Redis 服务依赖
@@ -57,7 +58,6 @@ name: CI
 on:
   push:
     branches: [ master ]
-
   pull_request:
     branches: [ master ]
 
@@ -67,6 +67,8 @@ jobs:
     uses: node-modules/github-actions/.github/workflows/node-test-mysql.yml@master
     with:
       os: 'ubuntu-latest'
+    # secrets:
+    #   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 ```
 
 ## 发布 NPM 包
@@ -90,23 +92,30 @@ jobs:
 
 根据 Commit Message 自动计算下一个版本号：
 
-- major 大版本：`BREAKING CHANGE`，必须加到 commit body 里面而不是第一行标题，否则不生效
+- major 大版本：`BREAKING CHANGE:`，必须加到 commit body 里面而不是第一行标题，否则不生效
 
 ```bash
 perf(pencil): remove graphiteWidth option
 
-BREAKING CHANGE: The graphiteWidth option has been removed. The default graphite width of 10mm is always used for performance reason.
+BREAKING CHANGE: The graphiteWidth option has been removed.
+The default graphite width of 10mm is always used for performance reason.
+```
+
+```bash
+feat: support WebStream
+
+BREAKING CHANGE: Drop Node.js < 18 support
 ```
 
 - minor 特性版本： `feat:` 等
-- patch 补丁版本：`fix:` 等
+- patch 补丁版本：`fix:` / `Revert` 等
 - 不发布版本： `chore:` / `docs:` / `style:` 等
 - 详见：<https://github.com/semantic-release/commit-analyzer>
 
 **注意：**
 
 - 不支持发布 0.x 版本，master 首次发布将是 1.0.0 版本
-- 如果你不期望直接发布，请在 beta 分支提交代码运行，将发布 `1.0.0-beta.1` 版本
+- 如果你不期望直接发布，请在 `beta` 分支提交代码运行，将发布 `1.0.0-beta.1` 版本
 - 多版本发布实践参见 [semantic-release](https://semantic-release.gitbook.io/semantic-release/recipes/release-workflow/distribution-channels) 文档
 
 ### 配置方式
@@ -131,7 +140,6 @@ on:
   # 合并后自动发布
   push:
     branches: [ master, main, next, beta, '*.x' ]
-
   # 手动发布
   workflow_dispatch: {}
 

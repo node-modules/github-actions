@@ -2,6 +2,11 @@ name: Node.js Unit Test
 
 on:
   workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        description: 'codecov token'
+        required: false
+
     inputs:
       os:
         type: string
