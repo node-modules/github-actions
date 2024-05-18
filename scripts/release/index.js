@@ -36,7 +36,7 @@ async function run() {
 
       // cnpm sync
       try {
-        const res = await request(`https://registry.npmmirror.com/-/package/${pkgInfo.name}/syncs`, {
+        const res = await request(`https://registry-direct.npmmirror.com/-/package/${pkgInfo.name}/syncs`, {
           method: 'PUT',
           timeout: 30000,
         });
