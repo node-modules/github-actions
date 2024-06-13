@@ -87,10 +87,9 @@ jobs:
           result-encoding: string
           script: |
             const osVersion = '${{ matrix.os }}';
-            const nodeVersion = '${{ matrix.version }}';
             const isMacOS = osVersion === 'macos-latest' || osVersion.startsWith('macos');
-            const isMajor14 = nodeVersion === '14' || nodeVersion.startsWith('14.');
-            if (isMacOS && isMajor14) {
+            const nodeVersion = parseInt('${{ matrix.version }}'.split('.')[0]);
+            if (isMacOS && nodeVersion <= 14) {
               return 'x64';
             } else {
               return '';
