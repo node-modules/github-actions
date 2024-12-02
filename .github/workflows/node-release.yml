@@ -24,7 +24,7 @@ on:
       install:
         type: string
         description: 'Install dependencies script'
-        default: 'npm i --no-package-lock --no-fund'
+        default: 'npm i --no-package-lock --no-fund --force'
 
       action_ref:
         type: string
