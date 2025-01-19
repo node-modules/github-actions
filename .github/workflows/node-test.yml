@@ -15,13 +15,18 @@ on:
 
       version:
         type: string
-        description: 'Node.js Version, such as 16, 18, 20, 22'
-        default: '16, 18, 20, 22'
+        description: 'Node.js Version, such as 18, 20, 22'
+        default: '18, 20, 22'
         
       install:
         type: string
         description: 'Install dependencies script'
         default: 'npm i --no-package-lock --no-fund'
+
+      test:
+        type: string
+        description: 'test script, such as: npm test, npm run ci'
+        default: 'npm run ci'
 
       action_ref:
         type: string
@@ -109,7 +114,7 @@ jobs:
         run: npm run lint --if-present
 
       - name: Run Test
-        run: npm run ci
+        run: ${{ inputs.test }}
 
       - name: Code Coverage
         uses: codecov/codecov-action@v3

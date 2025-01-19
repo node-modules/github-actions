@@ -45,7 +45,8 @@ jobs:
     # 支持以下自定义配置，一般用默认值即可
     # with:
     #   os: 'ubuntu-latest, macos-latest, windows-latest'
-    #   version: '16, 18, 20, 22'
+    #   version: '18, 20, 22'
+    #   test: 'npm run ci'
     # secrets:
     #   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 ```
@@ -65,8 +66,9 @@ jobs:
   Job:
     name: Node.js
     uses: node-modules/github-actions/.github/workflows/node-test-mysql.yml@master
-    with:
-      os: 'ubuntu-latest'
+    # with:
+    #   os: 'ubuntu-latest'
+    #   version: '18, 20, 22'
     # secrets:
     #   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 ```
@@ -141,7 +143,7 @@ on:
   push:
     branches: [ master, main, next, beta, '*.x' ]
   # 手动发布
-  workflow_dispatch: {}
+  # workflow_dispatch: {}
 
 jobs:
   release:

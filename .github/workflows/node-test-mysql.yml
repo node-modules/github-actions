@@ -10,7 +10,7 @@ on:
     inputs:
       os:
         type: string
-        description: 'Operator System, such as: ubuntu-latest,macos-latest'
+        description: 'Operator System, such as: ubuntu-latest, macos-latest'
         default: 'ubuntu-latest'
 
       version:
@@ -22,6 +22,11 @@ on:
         type: string
         description: 'Install dependencies script'
         default: 'npm i --no-package-lock --no-fund'
+
+      test:
+        type: string
+        description: 'test script, such as: npm test, npm run ci'
+        default: 'npm run ci'
 
       action_ref:
         type: string
@@ -134,7 +139,7 @@ jobs:
         run: npm run lint --if-present
 
       - name: Run Test
-        run: npm run ci
+        run: ${{ inputs.test }}
 
       - name: Code Coverage
         uses: codecov/codecov-action@v3
