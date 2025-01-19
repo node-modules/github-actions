@@ -11,7 +11,7 @@ on:
       os:
         type: string
         description: 'Operator System, such as: ubuntu-latest,macos-latest'
-        default: 'ubuntu-latest, macos-latest, windows-latest'
+        default: 'ubuntu-latest'
 
       version:
         type: string
