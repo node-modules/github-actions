@@ -15,8 +15,8 @@ on:
 
       version:
         type: string
-        description: 'Node.js Version, such as 16, 18, 20, 22'
-        default: '16, 18, 20, 22'
+        description: 'Node.js Version, such as 18, 20, 22'
+        default: '18, 20, 22'
         
       install:
         type: string
@@ -30,7 +30,7 @@ on:
 
       mysql_version:
         type: string
-        description: mysql version
+        description: 'mysql version, default to 5'
         default: '5'
 
 jobs:
