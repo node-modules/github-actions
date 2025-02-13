@@ -7,8 +7,8 @@ const mysqlVersion = mysqlVersionInput.split(',').map(x => x.trim());
 
 const parallel = parseInt(core.getInput('parallel')) || 3;
 const node_index = [];
-const total_nodes = parallel;
-for (let i = 0; i < total_nodes; i++) {
+const total_nodes = [ parallel ];
+for (let i = 0; i < parallel; i++) {
   node_index.push(i);
 }
 
