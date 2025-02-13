@@ -9,4 +9,14 @@ core.setOutput('os', JSON.stringify(os));
 core.setOutput('version', JSON.stringify(version));
 core.setOutput('mysql_version', JSON.stringify(mysqlVersion === '' ? [] : mysqlVersion));
 
-core.info(`os: ${os}, version: ${version}, mysql_version: ${mysqlVersion}`);
+const parallel = parseInt(core.getInput('parallel')) || 3;
+const node_index = [];
+const total_nodes = parallel;
+for (let i = 0; i < total_nodes; i++) {
+  node_index.push(i);
+}
+
+core.setOutput('node_index', JSON.stringify(node_index));
+core.setOutput('total_nodes', JSON.stringify(total_nodes));
+
+core.info(`os: ${os}, version: ${version}, mysql_version: ${mysqlVersion}, parallel: ${parallel}, node_index: ${node_index}, total_nodes: ${total_nodes}`);
