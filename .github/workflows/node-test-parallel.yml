@@ -1,4 +1,4 @@
-name: Node.js Unit Test
+name: Node.js Unit Test in Parallel
 
 on:
   workflow_call:
@@ -33,12 +33,19 @@ on:
         description: 'Branch name for node-modules/github-actions, for test purpose'
         default: master
 
+      parallel:
+        type: number
+        description: 'Number of parallel test jobs'
+        default: 3
+
 jobs:
   Setup:
     runs-on: ubuntu-latest
     outputs:
       os: ${{ steps.handler.outputs.os }}
       version: ${{ steps.handler.outputs.version }}
+      node_index: ${{ steps.handler.outputs.node_index }}
+      total_nodes: ${{ steps.handler.outputs.total_nodes }}
 
     steps:
       # Checkout action repository
@@ -65,6 +72,7 @@ jobs:
         env:
           INPUT_OS: ${{ inputs.os }}
           INPUT_VERSION: ${{ inputs.version }}
+          INPUT_PARALLEL: ${{ inputs.parallel }}
 
   Test:
     needs: Setup
@@ -73,12 +81,14 @@ jobs:
       matrix:
         os: ${{ fromJSON(needs.setup.outputs.os) }}
         version: ${{ fromJSON(needs.setup.outputs.version) }}
+        node_index: ${{ fromJSON(needs.setup.outputs.node_index) }}
+        total_nodes: ${{ fromJSON(needs.setup.outputs.total_nodes) }}
 
-    name: Test (${{ matrix.os }}, ${{ matrix.version }})
+    name: Test (${{ matrix.os }}, ${{ matrix.version }}, ${{ matrix.node_index }}:${{ matrix.total_nodes }})
     runs-on: ${{ matrix.os }}
 
     concurrency:
-      group: ${{ github.workflow }}-#${{ github.event.pull_request.number || github.ref }}-(${{ matrix.os }}, ${{ matrix.version }})
+      group: ${{ github.workflow }}-#${{ github.event.pull_request.number || github.ref }}-(${{ matrix.os }}, ${{ matrix.version }}, ${{ matrix.node_index }} / ${{ matrix.total_nodes }})
       cancel-in-progress: true
 
     steps:
@@ -109,12 +119,21 @@ jobs:
 
       - name: Install Dependencies
         run: ${{ inputs.install }}
+        env:
+          CI_NODE_INDEX: ${{ matrix.node_index }}
+          CI_NODE_TOTAL: ${{ matrix.total_nodes }}
 
       - name: Run Lint
         run: npm run lint --if-present
+        env:
+          CI_NODE_INDEX: ${{ matrix.node_index }}
+          CI_NODE_TOTAL: ${{ matrix.total_nodes }}
 
       - name: Run Test
         run: ${{ inputs.test }}
+        env:
+          CI_NODE_INDEX: ${{ matrix.node_index }}
+          CI_NODE_TOTAL: ${{ matrix.total_nodes }}
 
       - name: Code Coverage
         uses: codecov/codecov-action@v3

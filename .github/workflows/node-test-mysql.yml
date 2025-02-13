@@ -103,7 +103,7 @@ jobs:
           - 6379:6379
 
     concurrency:
-      group: ${{ github.workflow }}-#${{ github.event.pull_request.number || github.ref }}-(${{ matrix.os }}, ${{ matrix.version }}, ${{ matrix.mysql_version }})
+      group: ${{ github.workflow }}-#${{ github.event.pull_request.number || github.ref }}-(${{ matrix.os }}, ${{ matrix.version }}, mysql@${{ matrix.mysql_version }})
       cancel-in-progress: true
 
     steps:

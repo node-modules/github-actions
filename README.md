@@ -73,6 +73,29 @@ jobs:
     #   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 ```
 
+### 开启并行测试
+
+```yaml
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  Job:
+    name: Node.js
+    uses: node-modules/github-actions/.github/workflows/node-test-parallel.yml@master
+    # with:
+    #   os: 'ubuntu-latest'
+    #   version: '18, 20, 22'
+    #   parallel: 3
+    # secrets:
+    #   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+```
+
 ## 发布 NPM 包
 
 使用 [semantic-release](https://semantic-release.gitbook.io/) 自动发布 NPM 包。
