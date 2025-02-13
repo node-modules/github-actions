@@ -52,7 +52,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: node-modules/github-actions
+          repository: node-modules/github-actions@test-parallel
           path: action_repo
           ref: ${{ inputs.action_ref }}
 
