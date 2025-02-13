@@ -84,7 +84,7 @@ jobs:
         node_index: ${{ fromJSON(needs.setup.outputs.node_index) }}
         total_nodes: ${{ fromJSON(needs.setup.outputs.total_nodes) }}
 
-    name: Test (${{ matrix.os }}, ${{ matrix.version }}, ${{ matrix.node_index }} / ${{ matrix.total_nodes }})
+    name: Test (${{ matrix.os }}, ${{ matrix.version }}, ${{ matrix.node_index }}:${{ matrix.total_nodes }})
     runs-on: ${{ matrix.os }}
 
     concurrency:
