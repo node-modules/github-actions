@@ -1,4 +1,4 @@
-name: Node.js Unit Test in Parallel
+name: Node.js Unit Test
 
 on:
   workflow_call:
