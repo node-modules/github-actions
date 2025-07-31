@@ -65,6 +65,8 @@ jobs:
       # Setup Node.js environment
       - name: Setup Node.js
         uses: actions/setup-node@v4
+        with:
+          node-version: lts
 
       # Install action dependencies
       - name: Install action dependencies
