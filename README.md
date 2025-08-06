@@ -145,6 +145,14 @@ BREAKING CHANGE: Drop Node.js < 18 support
 
 ### 配置方式
 
+- 创建 GitHub Token
+  - 因为生成的 CHANGELOG.md 和 package.json 需回写 GitHub，而默认的 `GITHUB_TOKEN` 没有该权限。如会被保护分支规则拦截。
+  - 因此需要创建一个新的 Token，参见[文档](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
+
+- 配置 Token
+  - 在项目或组织维度配置 `GIT_TOKEN`
+  - 参见[文档](https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/managing-encrypted-secrets-for-your-repository-and-organization-for-github-codespaces)
+
 - 创建 `.github/workflows/release.yml`：
 
 ```yaml
@@ -160,6 +168,8 @@ jobs:
   release:
     name: Node.js
     uses: node-modules/github-actions/.github/workflows/npm-release.yml@master
+    secrets:
+      GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
     # with:
       # checkTest: false
       # dryRun: true
