@@ -166,7 +166,7 @@ on:
 
 jobs:
   release:
-    name: Node.js
+    name: NPM
     uses: node-modules/github-actions/.github/workflows/npm-release.yml@master
     secrets:
       GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
