@@ -87,6 +87,7 @@ jobs:
         id: release
         run: node ../action_repo/scripts/release/index.js
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DRYRUN: ${{ inputs.dryRun }}
 
       - name: Publish ${{ steps.release.outputs.name }}@${{ steps.release.outputs.release_version }}
