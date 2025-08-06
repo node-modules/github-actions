@@ -2,10 +2,6 @@ name: NPM Trusted Publisher
 
 on:
   workflow_call:
-    secrets:
-      GIT_TOKEN:
-        description: 'github personal token'
-        required: true
 
     inputs:
       checkTest:
@@ -34,6 +30,8 @@ jobs:
       contents: write
       id-token: write # Required for OIDC
       deployments: write
+      issues: write
+      pull-requests: write
     runs-on: ubuntu-latest
     defaults:
       run:

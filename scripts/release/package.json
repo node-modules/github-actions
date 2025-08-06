@@ -3,15 +3,16 @@
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/exec": "^1.1.1",
-    "@semantic-release/changelog": "^6.0.2",
+    "@semantic-release/npm": "13.0.0-alpha.5",
+    "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "conventional-changelog-conventionalcommits": "^5.0.0",
-    "semantic-release": "^19.0.5",
+    "semantic-release": "25.0.0-alpha.4",
     "undici": "^5.14.0"
   },
   "devDependencies": {
-    "@types/node": "^18.11.15",
-    "@types/semantic-release": "^17.2.4"
+    "@types/node": "24",
+    "@types/semantic-release": "21"
   }
 }
