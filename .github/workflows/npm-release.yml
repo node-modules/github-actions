@@ -69,11 +69,11 @@ jobs:
 
       # Install action dependencies
       - name: Install action dependencies
-        run: npm i --no-package-lock --no-fund --omit=dev
+        run: npm i --no-package-lock --no-fund --force --omit=dev
         working-directory: action_repo/scripts/release
 
       # Install dependencies
-      - name: Install dependencies
+      - name: Install project dependencies
         run: ${{ inputs.install }}
 
       # Run Test Only
