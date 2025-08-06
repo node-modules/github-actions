@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const core = require('@actions/core');
-const semanticRelease = require('semantic-release');
+const semanticRelease = require('semantic-release').default;
 const { request } = require('undici');
 
 async function run() {

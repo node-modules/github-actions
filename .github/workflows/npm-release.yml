@@ -70,7 +70,7 @@ jobs:
       # Install action dependencies
       - name: Install action dependencies
         run: npm i --no-package-lock --no-fund --force --omit=dev
-        working-directory: action_repo/scripts/release
+        working-directory: action_repo/scripts/npm-release
 
       # Install dependencies
       - name: Install project dependencies
@@ -83,7 +83,7 @@ jobs:
 
       - name: Semantic Release
         id: release
-        run: node ../action_repo/scripts/release/index.js
+        run: node ../action_repo/scripts/npm-release/index.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DRYRUN: ${{ inputs.dryRun }}
