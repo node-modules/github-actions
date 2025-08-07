@@ -67,10 +67,6 @@ jobs:
         with:
           node-version: lts/*
 
-      # Ensure npm 11.5.1 or later is installed
-      - name: Update npm
-        run: npm install -g npm@latest
-
       # Install action dependencies
       - name: Install action dependencies
         run: npm i --no-package-lock --no-fund --force --omit=dev
