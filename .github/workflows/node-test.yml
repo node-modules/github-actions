@@ -43,7 +43,7 @@ jobs:
     steps:
       # Checkout action repository
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: node-modules/github-actions
           path: action_repo
@@ -83,7 +83,7 @@ jobs:
 
     steps:
       - name: Checkout Git Source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Calculate Architecture
         uses: actions/github-script@v7
