@@ -57,7 +57,7 @@ jobs:
 
       # Setup Node.js environment
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
 
       # Install dependencies
       - name: Install dependencies
@@ -126,7 +126,7 @@ jobs:
             }
 
       - name: Use Node.js ${{ matrix.version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.version }}
           architecture: ${{ steps.calculate_architecture.outputs.result }}
