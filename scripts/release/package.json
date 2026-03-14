@@ -12,6 +12,6 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.15",
-    "@types/semantic-release": "^17.2.4"
+    "@types/semantic-release": "^21.0.0"
   }
 }
