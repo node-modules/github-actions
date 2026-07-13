@@ -23,6 +23,11 @@ on:
         description: 'Install dependencies script'
         default: 'npm i --no-package-lock --no-fund --force && rm -rf package-lock.json'
 
+      node-version:
+        type: string
+        description: 'Node.js version used to install and publish the package'
+        default: 'lts/*'
+
       action_ref:
         type: string
         description: 'Branch name for node-modules/github-actions, for test purpose'
@@ -65,7 +70,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version: ${{ inputs.node-version }}
 
       # Ensure npm 11.5.1 or later is installed
       - name: Update npm
