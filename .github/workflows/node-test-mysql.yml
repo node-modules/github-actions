@@ -49,7 +49,7 @@ jobs:
     steps:
       # Checkout action repository
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: node-modules/github-actions
           path: action_repo
@@ -57,7 +57,9 @@ jobs:
 
       # Setup Node.js environment
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
+        with:
+          package-manager-cache: false
 
       # Install dependencies
       - name: Install dependencies
@@ -108,10 +110,10 @@ jobs:
 
     steps:
       - name: Checkout Git Source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Calculate Architecture
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         id: calculate_architecture
         with:
           result-encoding: string
@@ -126,11 +128,12 @@ jobs:
             }
 
       - name: Use Node.js ${{ matrix.version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.version }}
           architecture: ${{ steps.calculate_architecture.outputs.result }}
           check-latest: true
+          package-manager-cache: false
 
       - name: Install Dependencies
         run: ${{ inputs.install }}
@@ -142,6 +145,6 @@ jobs:
         run: ${{ inputs.test }}
 
       - name: Code Coverage
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

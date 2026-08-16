@@ -48,7 +48,7 @@ jobs:
     steps:
       # Checkout action repository
       - name: Checkout action repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: node-modules/github-actions
           path: action_repo
@@ -56,16 +56,17 @@ jobs:
 
       # Checkout project repository
       - name: Checkout project repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           path: main_repo
           token: ${{ secrets.GIT_TOKEN }}
 
       # Setup Node.js environment
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: lts/*
+          package-manager-cache: false
 
       # Ensure npm 11.5.1 or later is installed
       - name: Update npm
