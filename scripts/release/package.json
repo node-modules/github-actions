@@ -1,7 +1,7 @@
 {
   "name": "ci-release",
   "dependencies": {
-    "@actions/core": "^1.10.0",
+    "@actions/core": "^3.0.0",
     "@actions/exec": "^1.1.1",
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/exec": "^6.0.3",
